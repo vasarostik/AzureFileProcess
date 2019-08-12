@@ -17,14 +17,16 @@ namespace Demo.Web.Controllers
 
         [HttpPost]
 
-        public async Task<IActionResult> Post([FromRoute]Guid id, [FromForm]IFormFile body)
+        public async Task<IActionResult> Post([FromRoute]Guid id, [FromForm]IFormFile body, [FromForm]String email)
         {
             using (var memoryStream = new MemoryStream())
             {
                 await body.CopyToAsync(memoryStream);
                 fileBytes = memoryStream.ToArray();
             }
-            name = Guid.NewGuid().ToString("n")+"_file";
+
+            name = email + "_" + Guid.NewGuid().ToString("n") + ".file";
+
 
             await CreateBlob(name, fileBytes);
             var filename = body.FileName;
@@ -55,6 +57,7 @@ namespace Demo.Web.Controllers
 
             using (Stream stream = new MemoryStream(data))
             {
+                Console.WriteLine(stream.ToString());
                 await blob.UploadFromStreamAsync(stream);
             }
         }

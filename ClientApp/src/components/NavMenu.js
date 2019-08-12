@@ -18,12 +18,7 @@ export class NavMenu extends Component {
         </Navbar.Header>
         <Navbar.Collapse>
           <Nav>
-            <LinkContainer to={'/'} exact>
-              <NavItem>
-                <Glyphicon glyph='home' /> Home
-              </NavItem>
-            </LinkContainer>
-            <LinkContainer to={'/upload'}>
+            <LinkContainer to={'/'}>
               <NavItem>
                     <Glyphicon glyph='th-list' /> Upload file
               </NavItem>
